@@ -31,7 +31,7 @@ export default {
   name: '',
   data() {
     return {
-      activeName: 'PermissMana'
+      activeName: 'DepMana'
     }
   },
   components: {

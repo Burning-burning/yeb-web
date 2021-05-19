@@ -30,17 +30,33 @@ import {
   Switch,
   Collapse,
   CollapseItem,
-  Card
+  Card,
+  Tree,
+  Popover,
+  Pagination,
+  Loading,
+  Row,
+  Col,
+  Radio,
+  RadioGroup,
+  DatePicker
 } from 'element-ui'
 
 Vue.use(Button)
-
+Vue.use(Loading.directive)
 Vue.use(Checkbox)
+Vue.use(DatePicker)
 Vue.use(Input)
+Vue.use(Radio)
+Vue.use(RadioGroup)
+Vue.use(Row)
+Vue.use(Col)
 Vue.use(Header)
 Vue.use(Main)
 Vue.use(Aside)
 Vue.use(Switch)
+Vue.use(Pagination)
+Vue.use(Tree)
 Vue.use(Container)
 Vue.use(Menu)
 Vue.use(Submenu)
@@ -49,6 +65,7 @@ Vue.use(Collapse)
 Vue.use(CollapseItem)
 Vue.use(Tag)
 Vue.use(FormItem)
+Vue.use(Popover)
 Vue.use(Form)
 Vue.use(MenuItem)
 Vue.use(Dialog)

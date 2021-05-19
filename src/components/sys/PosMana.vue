@@ -145,7 +145,6 @@ export default {
     },
     handleSelectionChange(val) {
       this.multipleSelection = val
-      console.log(val)
     }
   }
 }
