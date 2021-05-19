@@ -11,11 +11,13 @@ import {
   postRequest,
   putRequest
 } from './network/api'
+import downloadRequest from './utils/download'
 Vue.config.productionTip = false
 Vue.prototype.deleteRequest = deleteRequest
 Vue.prototype.putRequest = putRequest
 Vue.prototype.getRequest = getRequest
 Vue.prototype.postRequest = postRequest
+Vue.prototype.downloadRequest = downloadRequest
 router.beforeEach((to, form, next) => {
   if (window.sessionStorage.getItem('tokenStr')) {
     initMenu(router, store)

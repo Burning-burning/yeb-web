@@ -2,6 +2,9 @@ import Vue from 'vue'
 import {
   Button,
   Checkbox,
+  Steps,
+  Step,
+  Tooltip,
   Input,
   Message,
   Container,
@@ -39,16 +42,21 @@ import {
   Col,
   Radio,
   RadioGroup,
-  DatePicker
+  DatePicker,
+  Upload
 } from 'element-ui'
 
 Vue.use(Button)
 Vue.use(Loading.directive)
+Vue.use(Upload)
 Vue.use(Checkbox)
 Vue.use(DatePicker)
 Vue.use(Input)
+Vue.use(Tooltip)
 Vue.use(Radio)
 Vue.use(RadioGroup)
+Vue.use(Step)
+Vue.use(Steps)
 Vue.use(Row)
 Vue.use(Col)
 Vue.use(Header)
