@@ -25,6 +25,7 @@ router.beforeEach((to, form, next) => {
       getRequest('/admin/info').then(resp => {
         if (resp) {
           window.sessionStorage.setItem('user', JSON.stringify(resp))
+          store.commit('INIT_ADMIN', resp)
           next()
         }
       })

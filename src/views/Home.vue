@@ -4,16 +4,24 @@
       <el-header class="homeHeader"
         ><div class="title">云E办</div>
 
-        <el-dropdown class="userInfo" @command="handleCommand">
-          <span class="el-dropdown-link">
-            {{ user.name }}<img :src="user.userFace" />
-          </span>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="userInfo">个人中心</el-dropdown-item>
-            <el-dropdown-item command="setting">设置</el-dropdown-item>
-            <el-dropdown-item command="logout">注销登录</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
+        <div>
+          <el-button
+            @click="goTo"
+            type="text"
+            icon="el-icon-bell"
+            style="margin-right:8px;color:black"
+          ></el-button>
+          <el-dropdown class="userInfo" @command="handleCommand">
+            <span class="el-dropdown-link">
+              {{ user.name }}<img :src="user.userFace" />
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item command="userInfo">个人中心</el-dropdown-item>
+              <el-dropdown-item command="setting">设置</el-dropdown-item>
+              <el-dropdown-item command="logout">注销登录</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </div>
       </el-header>
 
       <el-container>
@@ -71,15 +79,21 @@ export default {
   name: '',
   data() {
     return {
-      user: JSON.parse(window.sessionStorage.getItem('user'))
+      // user: JSON.parse(window.sessionStorage.getItem('user'))
     }
   },
   computed: {
     getRoute() {
       return this.$store.state.routes
+    },
+    user() {
+      return this.$store.state.currentAdmin
     }
   },
   methods: {
+    goTo() {
+      this.$router.push('/chat')
+    },
     async handleCommand(command) {
       if (command === 'logout') {
         const confirmResult = await this.$confirm(
@@ -99,6 +113,8 @@ export default {
           this.$store.commit('initRoutes', [])
           this.$router.replace('/')
         }
+      } else if (command === 'userInfo') {
+        this.$router.push('/userinfo')
       }
     }
   }

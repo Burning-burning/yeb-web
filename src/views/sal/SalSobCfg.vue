@@ -121,8 +121,30 @@
         </template>
       </el-table-column>
       <el-table-column label="操作" align="center">
-        <template>
-          <el-button type="danger" size="mini">修改工资账套</el-button>
+        <template slot-scope="scoped">
+          <el-popover
+            @hide="hide(scoped.row)"
+            @show="show(scoped.row)"
+            placement="left"
+            title="编辑工资账套"
+            width="200"
+            trigger="click"
+          >
+            <div>
+              <el-select v-model="currentSalary" placeholder="请选择">
+                <el-option
+                  v-for="item in salaries"
+                  :key="item.id"
+                  :label="item.name"
+                  :value="item.id"
+                >
+                </el-option>
+              </el-select>
+            </div>
+            <el-button type="danger" slot="reference" size="mini"
+              >修改工资账套</el-button
+            >
+          </el-popover>
         </template>
       </el-table-column>
     </el-table>
@@ -150,10 +172,40 @@ export default {
       salaryList: [],
       total: 0,
       currentPage: 1,
-      size: 10
+      size: 10,
+      currentSalary: null,
+      salaries: []
     }
   },
+  created() {
+    this.getsalaryList()
+    this.getSalarySob()
+  },
   methods: {
+    async getSalarySob() {
+      const res = await this.getRequest('/salary/sobcfg/salaries')
+      console.log(res)
+      if (res) {
+        this.salaries = res
+      }
+    },
+    show(data) {
+      if (data.salary) {
+        this.currentSalary = data.salary.id
+      } else {
+        this.currentSalary = null
+      }
+    },
+    async hide(data) {
+      if (this.currentSalary !== data.salary.id) {
+        const res = await this.putRequest(
+          '/salary/sobcfg/?eid=' + data.id + '&sid=' + data.salary.id
+        )
+        if (res) {
+          this.getsalaryList()
+        }
+      }
+    },
     async getsalaryList() {
       const res = await this.getRequest(
         '/salary/sobcfg/?currentPage=' + this.currentPage + '&size=' + this.size
@@ -171,9 +223,6 @@ export default {
       this.size = size
       this.getsalaryList()
     }
-  },
-  created() {
-    this.getsalaryList()
   }
 }
 </script>
